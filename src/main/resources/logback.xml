@@ -1,0 +1,13 @@
+<configuration scan="true" scanPeriod="30 seconds">
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+		<target>System.out</target>
+	</appender>
+	<logger name="com.github.sarxos.ryzom.network.Lv20Socket.traffic" level="trace" />
+	
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
