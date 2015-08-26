@@ -14,6 +14,11 @@
   <name>Ryzom Network Client</name>
   <description>Ryzom Network WebSocket client</description>
   <inceptionYear>2015</inceptionYear>
+  <url>https://github.com/sarxos/ryzom-network-client</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
   <developers>
     <developer>
@@ -24,6 +29,18 @@
       <timezone>+2</timezone>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:sarxos/ryzom-network-client.git</connection>
+    <developerConnection>scm:git:git@github.com:sarxos/ryzom-network-client.git</developerConnection>
+    <url>git@github.com:sarxos/ryzom-network-client.git</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues Manager</system>
+    <url>https://github.com/sarxos/ryzom-network-client/issues</url>
+  </issueManagement>
 
   <repositories>
     <repository>
@@ -65,6 +82,14 @@
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>logback.xml</exclude>
+        </excludes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
