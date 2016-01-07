@@ -10,6 +10,10 @@ This is Karavan technology, not to be used by Kamis.
 
 
 ```java
+import com.github.sarxos.ryzom.network.Lv20Client;
+import com.github.sarxos.ryzom.network.Lv20Client.Chat;
+
+
 public static void main(String[] args) throws InterruptedException {
 
 	// client is closeable, so it can be used in either try/resources section
