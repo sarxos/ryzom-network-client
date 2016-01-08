@@ -97,7 +97,7 @@ public class Lv20Client implements Closeable {
 	 * milliseconds. It's greater than other ones because logout may take long time to execute (have
 	 * no idea why).
 	 */
-	private static final int MAX_LOGOUT_TIME = 500000;
+	private static final int MAX_LOGOUT_TIME = 15000;
 
 	/**
 	 * Threads factory used by the executor service.
