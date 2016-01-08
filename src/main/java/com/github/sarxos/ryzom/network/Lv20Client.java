@@ -73,7 +73,7 @@ public class Lv20Client implements Closeable {
 	/**
 	 * Chat service endpoint.
 	 */
-	private static final URI WS_URI = URI.create("ws://megacorp.io/sockjs/252/agrjomew/websocket");
+	private static final URI WS_URI = URI.create("ws://megacorp.io/sockjs/039/5ufzb501/websocket");
 
 	/**
 	 * Used to generate unique client IDs.
@@ -97,7 +97,7 @@ public class Lv20Client implements Closeable {
 	 * milliseconds. It's greater than other ones because logout may take long time to execute (have
 	 * no idea why).
 	 */
-	private static final int MAX_LOGOUT_TIME = 15000;
+	private static final int MAX_LOGOUT_TIME = 500000;
 
 	/**
 	 * Threads factory used by the executor service.
@@ -155,15 +155,16 @@ public class Lv20Client implements Closeable {
 		// spoof some headers data
 
 		ClientUpgradeRequest request = new ClientUpgradeRequest();
-		request.addExtensions("permessage-deflate");
 		request.getHeaders().put("Host", Arrays.asList("megacorp.io"));
 		request.getHeaders().put("User-Agent", Arrays.asList("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0"));
 		request.getHeaders().put("Origin", Arrays.asList("http://megacorp.io"));
 		request.getHeaders().put("Accept", Arrays.asList("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"));
 		request.getHeaders().put("Accept-Language", Arrays.asList("pl,en-US;q=0.7,en;q=0.3"));
-		request.getHeaders().put("Accept-Encoding", Arrays.asList("gzip, deflate"));
+		request.getHeaders().put("Accept-Encoding", Arrays.asList("gzip,deflate"));
 
 		wsClient.setConnectTimeout(MAX_CONNECT_TIME);
+
+		LOG.trace("Opening '{}' with headers {} and extensions {}", WS_URI, request.getHeaders(), request.getExtensions());
 
 		try {
 			wsClient.start();
@@ -172,13 +173,19 @@ public class Lv20Client implements Closeable {
 			throw new IllegalStateException(e);
 		}
 
+		LOG.trace("Connected to '{}'", WS_URI);
+
 		// await for the 'open' message (server notifies us about the connection to server open and
 		// ready to begin communication with)
+
+		LOG.trace("Awaiting for Ryzom connection");
 
 		if (!await(wsSocket::isRyzomConnectionOpen, MAX_CONNECT_TIME)) {
 			LOG.error("Unable to confirm connection in {} ms", MAX_CONNECT_TIME);
 			return false;
 		}
+
+		LOG.trace("Ryzom is now connected");
 
 		// send 'connect' message
 

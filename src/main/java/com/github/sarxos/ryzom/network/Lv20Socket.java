@@ -29,7 +29,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
- * LV-20 Ryzom Network WebSocket. The messages in this class has been reverse-engineered from the chat service traffic.
+ * LV-20 Ryzom Network WebSocket. The messages in this class has been reverse-engineered from the
+ * chat service traffic.
  * 
  * @author Bartosz Firyn (sarxos)
  */
@@ -300,7 +301,7 @@ public class Lv20Socket {
 
 	@OnWebSocketClose
 	public void onClose(int statusCode, String reason) {
-		LOG.debug("Ryzom WebSocket is now closed");
+		LOG.debug("Ryzom WebSocket is now closed, with status '{}' and reason '{}'", statusCode, reason);
 		session = null;
 	}
 
@@ -740,7 +741,8 @@ public class Lv20Socket {
 		send(map);
 	}
 
-	// ["{\"msg\":\"method\",\"method\":\"chat\",\"params\":[\"all\",\"How are you?\"],\"id\":\"15\"}"]
+	// ["{\"msg\":\"method\",\"method\":\"chat\",\"params\":[\"all\",\"How are
+	// you?\"],\"id\":\"15\"}"]
 
 	protected final void msgMethodChat(String chat, String text) {
 		Map<String, Object> map = new LinkedHashMap<>();
@@ -751,6 +753,7 @@ public class Lv20Socket {
 		send(map);
 	}
 
-	// ["{\"msg\":\"method\",\"method\":\"chat\",\"params\":[\"tell\",\"Kopeas bubu\"],\"id\":\"7\"}"]
+	// ["{\"msg\":\"method\",\"method\":\"chat\",\"params\":[\"tell\",\"Kopeas
+	// bubu\"],\"id\":\"7\"}"]
 
 }
